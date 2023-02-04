@@ -1,0 +1,55 @@
+1.创建爬虫项目   scrapy startproject 项目的名字
+                注意：项目的名字不允许使用数字开头  也不能包含中文
+2.创建爬虫文件
+                要在spiders文件中创建
+                cd "baidu_scrapy" \daidu_scrapy\spiders
+                加双引号
+
+                创建爬虫文件
+                scrapy genspider +爬虫的文件+爬虫的网址
+3.运行爬虫代码
+                scrapy crawl+ 爬虫的名字
+
+4.              settings文件中删掉Obey robots.txt rules
+
+
+5.属性
+
+        字符串 response.text
+        content =response.text
+
+
+        二进制 response.body
+        content= response.body
+
+        解析response   response.xpath  可以直接是xpath方法来解析response中的内容
+        span=response.xpath('//div[@id="filter"]/div[@class="tabs"]/a/span')[0]
+        print('=====================')
+        print(span.extract())
+
+
+
+        response.xpath   可以直接是xpath方法来解析response中的内容
+
+        response.extract()  提取seletor对象的data属性值
+
+        response.extract_first()   提取的是seletor列表的第一个数据
+
+6.下载 ipython
+                scrapy shell + 网址  就可以运行
+                运行5.属性
+
+7.链接提取器(读书网、终端)
+        from scrapy.linkextractors import LinkExtractor
+        In [6]: from scrapy.linkextractors import LinkExtractor
+
+        In [7]: link=LinkExtractor
+
+        In [8]: link = LinkExtractor(allow =r'/book/1188_\d+\.html')
+
+        In [9]: link.extract_links(response)
+
+8.crawlspider(读书网)
+        创建项目  scrapy startproject readbook_scrapy
+        跳转到目录 cd+
+        创建爬虫文件 scrapy genspider -t crawl read https://www.dushu.com/book/1188.html
